@@ -8,6 +8,8 @@ from django.views.generic import (
 									DetailView,
 									CreateView,
 									UpdateView,
+									DeleteView,
+									ListView,
 								)
 from . import models
 from . import forms
@@ -34,4 +36,37 @@ class UserProfileUpdateView(UpdateView):
 	fields = ('picture',)
 	model = models.UserProfileInfo
 	template_name = 'cat_app/profile_create.html'
+
+class UserProfileDeleteView(DeleteView):
+	context_object_name = 'profile'
+	model = models.UserProfileInfo
+	success_url = reverse_lazy('index')
+	template_name = 'cat_app/profile_delete_confirm.html'
+
+class CatListView(ListView):
+	context_object_name = 'cat_list'
+	model = models.Cat_Topic
+	template_name = 'cat_app/cat_list.html'
+
+class CatDetailView(DetailView):
+	context_object_name = 'cat_detail'
+	model = models.Cat_Topic
+	template_name = 'cat_app/cat_detail.html'
+
+class CatCreateView(CreateView):
+	fields = ('owner', 'cat_name', 'cat_picture', 'story')
+	model = models.Cat_Topic
+	template_name = 'cat_app/create_cat.html'
+
+class CatUpdateView(UpdateView):
+	fields = ('cat_name', 'cat_picture', 'story')
+	model = models.Cat_Topic
+	template_name = 'cat_app/create_cat.html'
+
+class CatDeleteView(DeleteView):
+	context_object_name = 'cat'
+	model = models.Cat_Topic
+	success_url = reverse_lazy('index')
+	template_name = 'cat_app/cat_delete_confirm.html'
+
 

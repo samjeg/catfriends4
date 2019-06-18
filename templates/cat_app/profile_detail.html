@@ -65,12 +65,15 @@
   <!-- Page Content -->
   <div class="container">
     <br>
-    <img class="profile-center" src="../../media/{{ profile_detail.picture }}"/>
+    <img class="profile-center" src="../../../media/{{ profile_detail.picture }}"/>
     <br>
-    <h1 class="my-4">Usernamed: {{ profile_detail.user.username }}</h1>
+    <h1 class="my-4">Username: {{ profile_detail.user.username }}</h1>
     <br>
     <div>
       <p><a class='btn btn-warning' href="{% url 'cat_app:update_profile' pk=profile_detail.pk %}">Update</a></p>
+    </div>
+    <div>
+      <p><a class='btn btn-danger' href="{% url 'cat_app:delete_profile' pk=profile_detail.pk %}">Delete</a></p>
     </div>
   </div>
   <!-- /.container -->

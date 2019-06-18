@@ -65,11 +65,11 @@
   <!-- Page Content -->
   <div class="container">
     <br>
-    <form enctype="multipart/form-data" method="POST">
+    <form method="POST">
       {% csrf_token %}
       <div class="register-container">
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary btn-btn">Add Picture</button>
+          <input type="Submit" class='btn btn-danger' value='Delete'>
+          <a class='btn btn-primary' href="{% url 'cat_app:profile_detail' pk=profile.pk %}">Cancel</a>
       </div>
     </form>
     <br>

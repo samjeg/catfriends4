@@ -15,3 +15,14 @@ class UserProfileInfo(models.Model):
 	def get_absolute_url(self):
 		return reverse('cat_app:profile_detail', kwargs={'pk':self.pk})
 
+class Cat_Topic(models.Model):
+	owner = models.ForeignKey(UserProfileInfo, on_delete=models.CASCADE, blank=True, null=True)
+	cat_name = models.CharField(max_length=20)
+	cat_picture = models.ImageField(upload_to='cat_images', blank=True, null=True)
+	story = models.CharField(max_length=140)
+
+	def __str__(self):
+		return self.owner.user.username
+
+	def get_absolute_url(self):
+		return reverse('cat_app:cat_detail', kwargs={'pk':self.pk})

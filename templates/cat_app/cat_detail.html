@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Cat Topic</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/cat_topic.css' %}" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="text-light bg-dark border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">
+          <h1 class="small-font">{{ cat_detail.cat_name }}<h1>
+          <br>
+          <h3 class="small-font">Username: {{ cat_detail.owner.user.username}}</h3>
+          <br>
+          <h3 class="small-font">{{ cat_detail.story }}</h3>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+        <a class="navbar-brand" href="index.html">Cat Collection</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+           <li class="nav-item">
+            <a class="nav-link" href="#">HomePage</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cat List</a>
+          </li>
+          </ul>
+        </div>
+         <div class="navbar-brand">
+        <img class='imageframe' src="{% static 'images/cat1.jpg' %}"/>
+      </div>
+      </nav>
+
+      <div class="container-fluid">
+       <br>
+      <img class="center" src="../../../media/{{ cat_detail.cat_picture }}"/>
+   
+      <div class="cat-comment-container">
+      <ul class="cat-comment-list">
+        <li class="cat-comment-list-item">
+          <div class="row">
+            <div class="col-2" >
+              <img class="comment-image" src="{% static 'images/cat1.jpg' %}"  alt="empty">
+            </div>
+            <div class="col-10">
+              <div class="row">
+                <div class="col">
+                  <b>Samuel</b>
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <p>Hello here is some text</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+        </li>
+        <li>
+          <div class="row">
+            <div class="col-2">
+              <img class="comment-image" src="{% static 'images/cat1.jpg' %}"  alt="empty">
+            </div>
+            <div class="col-10">
+              <div class="row">
+                <div class="col">
+                  <b>Samuel</b>
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <p>Hello here is some text</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+        </li>
+        </li>
+        <li>
+          <div class="row">
+            <div class="col-2">
+              <img class="comment-image" src="{% static 'images/cat1.jpg' %}" alt="empty">
+            </div>
+            <div class="col-10">
+              <div class="row">
+                <div class="col">
+                  <b>Samuel</b>
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                  <p>Hello here is some text</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+        </li>
+      </ul>
+      </div>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>

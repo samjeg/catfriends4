@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Profile</title>
+  <title>Delate Cat</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -65,11 +65,11 @@
   <!-- Page Content -->
   <div class="container">
     <br>
-    <form enctype="multipart/form-data" method="POST">
+    <form method="POST">
       {% csrf_token %}
       <div class="register-container">
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary btn-btn">Add Picture</button>
+          <input type="Submit" class='btn btn-danger' value='Delete'>
+          <a class='btn btn-primary' href="{% url 'cat_app:cat_detail' pk=cat.pk %}">Cancel</a>
       </div>
     </form>
     <br>

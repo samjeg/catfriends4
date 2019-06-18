@@ -9,14 +9,14 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Profile</title>
+  <title>Cat Collection</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="{% static 'css/modern-business.css' %}" rel="stylesheet">
-  <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+  <link href="{% static 'css/cat_list.css' %}" rel="stylesheet">
 
 
 </head>
@@ -64,17 +64,59 @@
 
   <!-- Page Content -->
   <div class="container">
-    <br>
-    <form enctype="multipart/form-data" method="POST">
-      {% csrf_token %}
-      <div class="register-container">
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary btn-btn">Add Picture</button>
-      </div>
-    </form>
-    <br>
+    <!-- <div class="cat-list-container">   -->
+      <button type="submit" class="btn btn-primary cat-list-button">Add Cat</button>
+    <!-- </div> -->
+    <div class="cat-list-container">
+      <ul class="my-4 cat-list-list">
+        {% for cat in cat_list %}
+        <li>
+          <table class="cat-list-item">
+            <tr>
+              <td class="cat-list-item-image-container" colspan="2">
+                <div class="cat-list-item-image-container">
+                  <img class="cat-list-item-image" src="../../media/{{ cat.cat_picture }}"/>
+                  <div class="centered-cat-text">
+                    <h1 class="black-text">
+                      {{ cat.cat_name }}
+                    </h1>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="owner">
+                <h3>Owner: {{ cat.owner }}</h3>
+              </td>
+              <td>
+                <button class="btn btn-primary cat-list-item-button">Select</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button class="btn btn-warning cat-list-item-button">Update</button>
+              </td>
+              <td>
+                <button class="btn btn-danger cat-list-item-button">Remove</button>
+              </td>
+            </tr>
+          </table>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
   </div>
   <!-- /.container -->
+    <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Cat Collection 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+
 </body>
 
 </html>
