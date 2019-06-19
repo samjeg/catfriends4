@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>{% block title %}{% endblock %}</title>
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/modern-business.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet" />
+  {% block templatecss %}{% endblock %}         
+</head>
+
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    {% block sidebar %}{% endblock %}
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+        <a class="navbar-brand" href="index.html">Cat Collection</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">HomePage</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cat_app:profile_detail' %}">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cat_app:login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cat_app:logout' %}">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cat_app:register' %}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cat_app:cat_list' %}">Cat List</a>
+          </li>
+          </ul>
+        </div>
+        <div class="navbar-brand">
+        {% block imagenav %}{% endblock %}
+      </div>
+      </div>
+      </nav>
+
+      <div class="container-fluid">
+          {% block content %}{% endblock %}
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+  </div>
+
+</body>
+
+</html>

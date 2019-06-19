@@ -14,6 +14,7 @@ from django.views.generic import (
 from . import models
 from . import forms
 
+
 class Register(CreateView):
     form_class = forms.UserCreateForm
     template_name = "cat_app/register.html"
@@ -21,6 +22,16 @@ class Register(CreateView):
 
 class IndexView(TemplateView):
 	template_name = 'cat_app/index.html'
+
+	def get_context_data(self, **kwargs):
+		context = super(IndexView, self).get_context_data(**kwargs)
+		profiles = models.UserProfileInfo.objects.all()
+		user = self.request.user
+		if user.is_authenticated:
+			for profile in profiles:
+				if user.id == profile.user.id:
+					context['profile_detail'] = profile
+		return context
 
 class UserProfileDetailView(DetailView):
 	context_object_name = 'profile_detail'
@@ -32,41 +43,113 @@ class UserProfileCreateView(CreateView):
 	model = models.UserProfileInfo
 	template_name = 'cat_app/profile_create.html'
 
+	def get_context_data(self, **kwargs):
+		context = super(UserProfileCreateView, self).get_context_data(**kwargs)
+		profiles = models.UserProfileInfo.objects.all()
+		user = self.request.user
+		if user.is_authenticated:
+			for profile in profiles:
+				if user.id == profile.user.id:
+					context['profile_detail'] = profile
+		return context
+
 class UserProfileUpdateView(UpdateView):
 	fields = ('picture',)
 	model = models.UserProfileInfo
 	template_name = 'cat_app/profile_create.html'
 
+	def get_context_data(self, **kwargs):
+		context = super(UserProfileUpdateView, self).get_context_data(**kwargs)
+		profiles = models.UserProfileInfo.objects.all()
+		user = self.request.user
+		if user.is_authenticated:
+			for profile in profiles:
+				if user.id == profile.user.id:
+					context['profile_detail'] = profile
+		return context
+
 class UserProfileDeleteView(DeleteView):
-	context_object_name = 'profile'
+	context_object_name = 'profile_detail'
 	model = models.UserProfileInfo
 	success_url = reverse_lazy('index')
 	template_name = 'cat_app/profile_delete_confirm.html'
 
 class CatListView(ListView):
-	context_object_name = 'cat_list'
 	model = models.Cat_Topic
 	template_name = 'cat_app/cat_list.html'
 
+	def get_context_data(self, **kwargs):
+		context = super(CatListView, self).get_context_data(**kwargs)
+		context['cat_list'] = self.object_list
+		profiles = models.UserProfileInfo.objects.all()
+		user = self.request.user
+		if user.is_authenticated:
+			for profile in profiles:
+				if user.id == profile.user.id:
+					context['profile_detail'] = profile
+		return context
+
 class CatDetailView(DetailView):
-	context_object_name = 'cat_detail'
 	model = models.Cat_Topic
 	template_name = 'cat_app/cat_detail.html'
+
+	def get_context_data(self, **kwargs):
+		context = super(CatListView, self).get_context_data(**kwargs)
+		context['cat_detail'] = self.get_object()
+		profiles = models.UserProfileInfo.objects.all()
+		user = self.request.user
+		if user.is_authenticated:
+			for profile in profiles:
+				if user.id == profile.user.id:
+					context['profile_detail'] = profile
+		return context
 
 class CatCreateView(CreateView):
 	fields = ('owner', 'cat_name', 'cat_picture', 'story')
 	model = models.Cat_Topic
 	template_name = 'cat_app/create_cat.html'
 
+	def get_context_data(self, **kwargs):
+		context = super(CatCreateView, self).get_context_data(**kwargs)
+		context['cat_detail'] = self.get_object()
+		profiles = models.UserProfileInfo.objects.all()
+		user = self.request.user
+		if user.is_authenticated:
+			for profile in profiles:
+				if user.id == profile.user.id:
+					context['profile_detail'] = profile
+		return context
+
 class CatUpdateView(UpdateView):
 	fields = ('cat_name', 'cat_picture', 'story')
 	model = models.Cat_Topic
 	template_name = 'cat_app/create_cat.html'
 
+	def get_context_data(self, **kwargs):
+		context = super(CatUpdateView, self).get_context_data(**kwargs)
+		context['cat_detail'] = self.get_object()
+		profiles = models.UserProfileInfo.objects.all()
+		user = self.request.user
+		if user.is_authenticated:
+			for profile in profiles:
+				if user.id == profile.user.id:
+					context['profile_detail'] = profile
+		return context
+
 class CatDeleteView(DeleteView):
-	context_object_name = 'cat'
 	model = models.Cat_Topic
 	success_url = reverse_lazy('index')
 	template_name = 'cat_app/cat_delete_confirm.html'
+
+	def get_context_data(self, **kwargs):
+		context = super(CatDeleteView, self).get_context_data(**kwargs)
+		context['cat_detail'] = self.get_object()
+		profiles = models.UserProfileInfo.objects.all()
+		user = self.request.user
+		if user.is_authenticated:
+			for profile in profiles:
+				if user.id == profile.user.id:
+					context['profile_detail'] = profile
+		return context
 
 

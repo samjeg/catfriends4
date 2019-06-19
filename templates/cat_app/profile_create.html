@@ -1,80 +1,15 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Profile</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="{% static 'css/modern-business.css' %}" rel="stylesheet">
-  <link href="{% static 'css/profile.css' %}" rel="stylesheet">
-
-
-</head>
-
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Cat Collection</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon">
-          <!-- <div class="imageframe"> -->
-            <!-- Hello World -->
-          <!-- </div> -->
-        </span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">HomePage</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cat List</a>
-          </li>
-        </ul>
-      </div>
-      <div class="navbar-brand">
-        <img class='imageframe' src="{% static 'images/cat1.jpg' %}"/>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Page Content -->
-  <div class="container">
+{% extends "base.html" %}
+{% block title %}Profile Form{% endblock %}
+{% block templatecss %}<link href="{% static 'css/profile.css' %}" rel="stylesheet" />{% endblock %}
+{% block imagenav %}<img class="imageframe" src="media/{{ profile_detail.picture }}" alt="{{ profile_detail.picture }}">{% endblock %}
+{% block content %}
     <br>
     <form enctype="multipart/form-data" method="POST">
       {% csrf_token %}
       <div class="register-container">
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary btn-btn">Add Picture</button>
+        <button type="submit" class="btn btn-primary btn-btn">Update</button>
       </div>
     </form>
     <br>
-  </div>
-  <!-- /.container -->
-</body>
-
-</html>
+{% endblock %}
