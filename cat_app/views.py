@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
+from django.http import HttpResponseForbidden
+from django.urls import reverse
 from django.views.generic import (
 									TemplateView, 
 									DetailView,
@@ -11,6 +13,7 @@ from django.views.generic import (
 									DeleteView,
 									ListView,
 								)
+from django.views.generic.edit import FormMixin
 from . import models
 from . import forms
 
@@ -89,20 +92,50 @@ class CatListView(ListView):
 					context['profile_detail'] = profile
 		return context
 
-class CatDetailView(DetailView):
+class CatDetailView(FormMixin, DetailView):
 	model = models.Cat_Topic
 	template_name = 'cat_app/cat_detail.html'
+	form_class = forms.CatCommentForm
+
+	def get_success_url(self):
+		return reverse_lazy('cat_app:cat_detail', kwargs={'pk': self.object.pk})
 
 	def get_context_data(self, **kwargs):
-		context = super(CatListView, self).get_context_data(**kwargs)
+		context = super(CatDetailView, self).get_context_data(**kwargs)
+		form = self.get_form()
 		context['cat_detail'] = self.get_object()
+		cat_topic = self.get_object()
 		profiles = models.UserProfileInfo.objects.all()
 		user = self.request.user
 		if user.is_authenticated:
+			form.initial['user'] = user.id
+			form.initial['cat_topic'] = cat_topic.id
+			context['form'] = form
 			for profile in profiles:
 				if user.id == profile.user.id:
 					context['profile_detail'] = profile
 		return context
+
+	def post(self, request, *args, **kwargs):
+		if not request.user.is_authenticated:
+			return HttpResponseForbidden()
+		self.object = self.get_object()
+		form = self.get_form()
+		if form.is_valid():
+			return self.form_valid(form)
+		else:
+			return self.form_invalid(form)
+
+	def form_valid(self, form):
+		new_comment = models.Cat_Topic_Comment(
+			user = form.cleaned_data['user'],
+			cat_topic = form.cleaned_data['cat_topic'],
+			comment = form.cleaned_data['comment']
+		)
+
+		new_comment.save()
+		
+		return super(CatDetailView, self).form_valid(form)
 
 class CatCreateView(CreateView):
 	fields = ('owner', 'cat_name', 'cat_picture', 'story')

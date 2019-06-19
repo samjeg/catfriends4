@@ -11,7 +11,6 @@
   <!-- Bootstrap core CSS -->
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
   <!-- Custom styles for this template -->
-  <link href="{% static 'css/modern-business.css' %}" rel="stylesheet" />
   <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet" />
   {% block templatecss %}{% endblock %}         
 </head>
@@ -40,9 +39,6 @@
             <a class="nav-link" href="{% url 'index' %}">HomePage</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'cat_app:profile_detail' %}">Profile</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="{% url 'cat_app:login' %}">Login</a>
           </li>
           <li class="nav-item">
@@ -57,9 +53,8 @@
           </ul>
         </div>
         <div class="navbar-brand">
-        {% block imagenav %}{% endblock %}
-      </div>
-      </div>
+          {% block imagenav %}{% endblock %}
+        </div>
       </nav>
 
       <div class="container-fluid">
