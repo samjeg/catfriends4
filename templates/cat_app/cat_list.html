@@ -3,8 +3,16 @@
 {% block title %}Cat List{% endblock %}
 {% block templatecss %}<link href="{% static 'css/cat_list.css' %}" rel="stylesheet">{% endblock %}
 {% block imagenav %}<img class="imageframe" src="../../media/{{ profile_detail.picture }}" alt="{{ profile_detail.picture }}">{% endblock %}
+{% block profile_nav %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'cat_app:profile_detail' pk=profile_detail.pk %}">Profile</a>
+  </li>
+{% endblock %}
+
 {% block content %}
-    <button type="submit" class="btn btn-primary cat-list-button">Add Cat</button>
+    <div>
+    <a type="submit" class="btn btn-primary cat-list-button"  href="{% url 'cat_app:create_cat' %}">Add Cat</a>
+    </div>
     <!-- </div> -->
     <div class="cat-list-container">
       <ul class="my-4 cat-list-list">
@@ -28,15 +36,21 @@
                 <h3>Owner: {{ cat.owner }}</h3>
               </td>
               <td>
-                <button class="btn btn-primary cat-list-item-button">Select</button>
+                <div>
+                <a class="btn btn-primary cat-list-item-button" href="{% url 'cat_app:cat_detail' pk=cat.pk %}">Select</a>
+                </div>
               </td>
             </tr>
             <tr>
               <td>
-                <button class="btn btn-warning cat-list-item-button">Update</button>
+                <div>
+                <a class="btn btn-warning cat-list-item-button" href="{% url 'cat_app:update_cat' pk=cat.pk %}">Update</a>
+              </div>
               </td>
               <td>
-                <button class="btn btn-danger cat-list-item-button">Remove</button>
+                <div>
+                  <a class="btn btn-danger cat-list-item-button"  href="{% url 'cat_app:delete_cat' pk=cat.pk %}">Remove</a>
+                </div>
               </td>
             </tr>
           </table>

@@ -3,6 +3,12 @@
 {% block title %}Home Page{% endblock %}
 {% block templatecss %}<link href="{% static 'css/style.css' %}" rel="stylesheet" />{% endblock %}
 {% block imagenav %}<img class="imageframe" src="media/{{ profile_detail.picture }}" alt="{{ profile_detail.picture }}">{% endblock %}
+{% block profile_nav %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'cat_app:profile_detail' pk=profile_detail.pk %}">Profile</a>
+  </li>
+{% endblock %}
+
 {% block content %}
    <img class="center" src="{% static 'images/logo.jpg' %}"/>
     

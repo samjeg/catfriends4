@@ -39,17 +39,21 @@
             <a class="nav-link" href="{% url 'index' %}">HomePage</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'cat_app:login' %}">Login</a>
+            <a class="nav-link" href="{% url 'cat_app:cat_list' %}">Cat List</a>
           </li>
-          <li class="nav-item">
+         {% if user.is_authenticated %}
+           <li class="nav-item">
             <a class="nav-link" href="{% url 'cat_app:logout' %}">Logout</a>
+            </li>
+            {% block profile_nav %}{% endblock %}
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cat_app:login' %}">Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'cat_app:register' %}">Register</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'cat_app:cat_list' %}">Cat List</a>
-          </li>
+          {% endif %}
           </ul>
         </div>
         <div class="navbar-brand">

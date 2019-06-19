@@ -10,7 +10,9 @@ urlpatterns = [
 				template_name="cat_app/login.html",
 			),
 			name='login'),
-    url(r"^logout/$", auth_views.LogoutView.as_view(), name="logout"),
+    url(r"^logout/$", auth_views.LogoutView.as_view(
+    		template_name="cat_app/index.html"
+    	), name="logout"),
     url(r'^register/$', views.Register.as_view(), name='register'),
 	url(r'^profile/(?P<pk>\d+)/$', views.UserProfileDetailView.as_view(), name='profile_detail'),
 	url(r'^create_profile/$', views.UserProfileCreateView.as_view(), name='create_profile'),
