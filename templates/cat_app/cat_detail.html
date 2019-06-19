@@ -3,11 +3,13 @@
 {% block title %}Cat Topic{% endblock %}
 {% block templatecss %}<link href="{% static 'css/cat_topic.css' %}" rel="stylesheet" />{% endblock %}
 {% block imagenav %}<img class="imageframe" src="../../../media/{{ profile_detail.picture }}" alt="{{ profile_detail.picture }}">{% endblock %}
+{% if user.is_authenticated %}
 {% block profile_nav %}
   <li class="nav-item">
     <a class="nav-link" href="{% url 'cat_app:profile_detail' pk=profile_detail.pk %}">Profile</a>
   </li>
 {% endblock %}
+{% endif %}
 {% block sidebar %}
     <div class="text-light bg-dark border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">
@@ -28,12 +30,12 @@
         <li class="cat-comment-list-item">
           <div class="row">
             <div class="col-2" >
-              <img class="comment-image" src="../../../media/{{ profile_detail.picture }}"  alt="empty">
+              <img class="comment-image" src="../../../media/{{ comment.comment_picture_path }}"  alt="empty">
             </div>
             <div class="col-10">
               <div class="row">
                 <div class="col">
-                  <b>{{ comment.user.username }}</b>
+                  <b>Yo {{ comment.comment_picture_path }} {{ comment.user.username }}</b>
                 </div>
                 <div class="w-100"></div>
                 <div class="col">

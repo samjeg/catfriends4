@@ -108,12 +108,13 @@ class CatDetailView(FormMixin, DetailView):
 		profiles = models.UserProfileInfo.objects.all()
 		user = self.request.user
 		if user.is_authenticated:
-			form.initial['user'] = user.id
-			form.initial['cat_topic'] = cat_topic.id
-			context['form'] = form
 			for profile in profiles:
 				if user.id == profile.user.id:
 					context['profile_detail'] = profile
+					form.initial['user'] = user.id
+					form.initial['cat_topic'] = cat_topic.id
+					form.initial['comment_picture_path'] = profile.picture
+					context['form'] = form
 		return context
 
 	def post(self, request, *args, **kwargs):
@@ -130,7 +131,8 @@ class CatDetailView(FormMixin, DetailView):
 		new_comment = models.Cat_Topic_Comment(
 			user = form.cleaned_data['user'],
 			cat_topic = form.cleaned_data['cat_topic'],
-			comment = form.cleaned_data['comment']
+			comment = form.cleaned_data['comment'],
+			comment_picture_path = form.cleaned_data['comment_picture_path']
 		)
 
 		new_comment.save()

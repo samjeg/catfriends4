@@ -3,11 +3,13 @@
 {% block title %}Cat List{% endblock %}
 {% block templatecss %}<link href="{% static 'css/cat_list.css' %}" rel="stylesheet">{% endblock %}
 {% block imagenav %}<img class="imageframe" src="../../media/{{ profile_detail.picture }}" alt="{{ profile_detail.picture }}">{% endblock %}
+{% if user.is_authenticated %}
 {% block profile_nav %}
   <li class="nav-item">
     <a class="nav-link" href="{% url 'cat_app:profile_detail' pk=profile_detail.pk %}">Profile</a>
   </li>
 {% endblock %}
+{% endif %}
 
 {% block content %}
     <div>

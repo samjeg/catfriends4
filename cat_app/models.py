@@ -31,6 +31,7 @@ class Cat_Topic_Comment(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 	cat_topic = models.ForeignKey(Cat_Topic, related_name="comments", on_delete=models.CASCADE, blank=True, null=True)
 	comment = models.CharField(max_length=140)
+	comment_picture_path = models.CharField(max_length=20, blank=True, null=True)
 
 	def __str__(self):
 		return self.user.username

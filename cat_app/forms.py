@@ -23,9 +23,10 @@ class CatCommentForm(forms.Form):
 	user = forms.ModelChoiceField(queryset=User.objects.all())
 	cat_topic = forms.ModelChoiceField(queryset=Cat_Topic.objects.all())
 	comment = forms.CharField()
+	comment_picture_path = forms.CharField(required=False)
 
 	class Meta:
-		fields = ("user", "cat_topic", "comment")
+		fields = ("user", "cat_topic", "comment", "comment_picture_path")
 		model = Cat_Topic_Comment
 
 
