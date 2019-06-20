@@ -18,6 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+FIXTURE_DIR = os.path.join(BASE_DIR, 'fixtures')
 
 
 # Quick-start development settings - unsuitable for production
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'selenium',
     'cat_app'
 ]
 
@@ -131,6 +133,12 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = MEDIA_DIR
+
+# FIXTURES
+
+FIXTURE_DIRS = [
+    FIXTURE_DIR,
+]
 
 #LOGIN STUFF
 
