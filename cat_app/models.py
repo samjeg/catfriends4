@@ -22,7 +22,7 @@ class Cat_Topic(models.Model):
 	story = models.CharField(max_length=140)
 
 	def __str__(self):
-		return self.owner.user.username
+		return self.cat_name
 
 	def get_absolute_url(self):
 		return reverse('cat_app:cat_detail', kwargs={'pk':self.pk})

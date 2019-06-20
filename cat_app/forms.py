@@ -20,13 +20,15 @@ class UserCreateForm(UserCreationForm):
 
 
 class CatCommentForm(forms.Form):
-	user = forms.ModelChoiceField(queryset=User.objects.all())
-	cat_topic = forms.ModelChoiceField(queryset=Cat_Topic.objects.all())
+	user = forms.ModelChoiceField(widget = forms.HiddenInput(), queryset=User.objects.all())
+	cat_topic = forms.ModelChoiceField(widget = forms.HiddenInput(), queryset=Cat_Topic.objects.all())
 	comment = forms.CharField()
-	comment_picture_path = forms.CharField(required=False)
+	comment_picture_path = forms.CharField(widget = forms.HiddenInput(), required=False)
 
 	class Meta:
 		fields = ("user", "cat_topic", "comment", "comment_picture_path")
 		model = Cat_Topic_Comment
 
-
+	def __init__(self, *args, **kwargs):
+		super(CatCommentForm, self).__init__(*args, **kwargs)
+		self.fields['comment'].widget.attrs['class'] = 'comment-input'

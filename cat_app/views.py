@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseForbidden
 from django.urls import reverse
+from django import forms as django_forms
 from django.views.generic import (
 									TemplateView, 
 									DetailView,
@@ -42,7 +43,7 @@ class UserProfileDetailView(DetailView):
 	template_name = 'cat_app/profile_detail.html'
 
 class UserProfileCreateView(CreateView):
-	fields = ('user', 'picture')
+	fields = ('user', 'picture',)
 	model = models.UserProfileInfo
 	template_name = 'cat_app/profile_create.html'
 
@@ -50,7 +51,11 @@ class UserProfileCreateView(CreateView):
 		context = super(UserProfileCreateView, self).get_context_data(**kwargs)
 		profiles = models.UserProfileInfo.objects.all()
 		user = self.request.user
+		form = self.get_form()
 		if user.is_authenticated:
+			form.initial['user'] = user.id
+			form.fields['user'].widget = django_forms.HiddenInput()
+			context['profile_form'] = form
 			for profile in profiles:
 				if user.id == profile.user.id:
 					context['profile_detail'] = profile
@@ -65,10 +70,14 @@ class UserProfileUpdateView(UpdateView):
 		context = super(UserProfileUpdateView, self).get_context_data(**kwargs)
 		profiles = models.UserProfileInfo.objects.all()
 		user = self.request.user
+		form = self.get_form()
 		if user.is_authenticated:
+			context['profile_form'] = form
 			for profile in profiles:
 				if user.id == profile.user.id:
 					context['profile_detail'] = profile
+
+
 		return context
 
 class UserProfileDeleteView(DeleteView):
@@ -146,13 +155,16 @@ class CatCreateView(CreateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(CatCreateView, self).get_context_data(**kwargs)
-		context['cat_detail'] = self.get_object()
-		profiles = models.UserProfileInfo.objects.all()
 		user = self.request.user
+		profiles = models.UserProfileInfo.objects.all()
+		form = self.get_form()
 		if user.is_authenticated:
 			for profile in profiles:
 				if user.id == profile.user.id:
 					context['profile_detail'] = profile
+					form.initial['owner'] = user.id
+					form.fields['owner'].widget = django_forms.HiddenInput()
+					context['cat_form'] = form
 		return context
 
 class CatUpdateView(UpdateView):
@@ -162,13 +174,14 @@ class CatUpdateView(UpdateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(CatUpdateView, self).get_context_data(**kwargs)
-		context['cat_detail'] = self.get_object()
 		profiles = models.UserProfileInfo.objects.all()
 		user = self.request.user
+		form = self.get_form()
 		if user.is_authenticated:
 			for profile in profiles:
 				if user.id == profile.user.id:
 					context['profile_detail'] = profile
+					context['cat_form'] = form
 		return context
 
 class CatDeleteView(DeleteView):
