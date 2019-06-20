@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Profile Form{% endblock %}
 {% block templatecss %}<link href="{% static 'css/profile.css' %}" rel="stylesheet" />{% endblock %}
-{% block imagenav %}<img class="imageframe" src="../../media/{{ profile_detail.picture }}" alt="{{ profile_detail.picture }}">{% endblock %}
+{% block imagenav %}<img class="imageframe" src="../../../../media/{{ profile_detail.picture }}" alt="{{ profile_detail.picture }}">{% endblock %}
 {% block content %}
     <br>
     <form enctype="multipart/form-data" method="POST">

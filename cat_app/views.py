@@ -80,12 +80,6 @@ class UserProfileUpdateView(UpdateView):
 
 		return context
 
-class UserProfileDeleteView(DeleteView):
-	context_object_name = 'profile_detail'
-	model = models.UserProfileInfo
-	success_url = reverse_lazy('index')
-	template_name = 'cat_app/profile_delete_confirm.html'
-
 class CatListView(ListView):
 	model = models.Cat_Topic
 	template_name = 'cat_app/cat_list.html'
