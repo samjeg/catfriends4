@@ -150,19 +150,19 @@ class UserProfileTests(TestCase):
 
 		self.assertEqual(lengthBefore!=lengthAfter, True)
 
-class CatFriendsSeleniumTests(LiveServerTestCase):
+class LoginSeleniumTests(LiveServerTestCase):
 	databases = {"__all__"}
 
 	@classmethod
 	def setUpClass(cls):
-		super(CatFriendsSeleniumTests, cls).setUpClass()
+		super(LoginSeleniumTests, cls).setUpClass()
 		cls.selenium = WebDriver()
-		cls.selenium.implicitly_wait(2000)
+		cls.selenium.implicitly_wait(10)
 
 	@classmethod
 	def tearDownClass(cls):
 		cls.selenium.quit()
-		super(CatFriendsSeleniumTests, cls).tearDownClass()
+		super(LoginSeleniumTests, cls).tearDownClass()
 
 	def test_login(self):
 		print('test8')
@@ -172,7 +172,6 @@ class CatFriendsSeleniumTests(LiveServerTestCase):
 		password_input = self.selenium.find_element_by_name("password")
 		password_input.send_keys('testpassword')
 		self.selenium.find_element_by_name("login_button").click()
-		# index_text = self.selenium.find_element_by_name("index_text")
 		body = self.selenium.find_element_by_tag_name('body')
 		self.assertIn("Welcome", body.text)
 
@@ -185,7 +184,65 @@ class CatFriendsSeleniumTests(LiveServerTestCase):
 		password_input = self.selenium.find_element_by_name("password")
 		password_input.send_keys('not a password')
 		self.selenium.find_element_by_name("login_button").click()
-		# index_text = self.selenium.find_element_by_name("index_text")
 		body = self.selenium.find_element_by_tag_name('body')
 		self.assertNotIn("Welcome", body.text)
+
+	def test_logout(self):
+		print('test10')
+		self.selenium.get("http://127.0.0.1:8000/cat_app/login/")
+		username_input = self.selenium.find_element_by_name("username")
+		username_input.send_keys('Jilly')
+		password_input = self.selenium.find_element_by_name("password")
+		password_input.send_keys('testpassword')
+		self.selenium.find_element_by_name("login_button").click()
+		self.selenium.find_element_by_name("logout_nav").click()
+		body = self.selenium.find_element_by_tag_name('body')
+		self.assertNotIn("logout_nav", body.text)
+
+	def test_register(self):
+		timeout = 10
+		print('test10')
+		self.selenium.get("http://127.0.0.1:8000/")
+		self.selenium.find_element_by_name("register_nav").click()
+		reg_username_input = self.selenium.find_element_by_name("username")
+		reg_username_input.send_keys('Mamba')
+		reg_password_input1 = self.selenium.find_element_by_name("password1")
+		reg_password_input1.send_keys('testpassword')
+		reg_password_input2 = self.selenium.find_element_by_name("password2")
+		reg_password_input2.send_keys('testpassword')
+		self.selenium.find_element_by_name("reg_submit_btn").click()
+		
+		self.selenium.find_element_by_name("login_nav").click()
+		username_input = self.selenium.find_element_by_name("username")
+		username_input.send_keys('Mamba')
+		password_input = self.selenium.find_element_by_name("password")
+		password_input.send_keys('testpassword')
+		self.selenium.find_element_by_name("login_button").click()
+		
+		body = self.selenium.find_element_by_tag_name('body')
+		self.assertIn("Welcome", body.text)
+
+
+	def test_profile(self):
+		print('test11')
+		self.selenium.get("http://127.0.0.1:8000/cat_app/login/")
+		username_input = self.selenium.find_element_by_name("username")
+		username_input.send_keys('Barbossa')
+		password_input = self.selenium.find_element_by_name("password")
+		password_input.send_keys('testpassword')
+		self.selenium.find_element_by_name("login_button").click()
+		
+		self.selenium.find_element_by_name("create_profile_nav").click()
+		create_picture_input = self.selenium.find_element_by_name("picture")
+		create_picture_input.send_keys("C:/Users/samje/Documents/WebProjects2/djangoenv/catfriends4/static/images/profile1.jpg")
+		self.selenium.find_element_by_name("profile_submit").click()
+
+		self.selenium.find_element_by_name("update_profile_link").click()
+		update_picture_input = self.selenium.find_element_by_name("picture")
+		update_picture_input.send_keys("C:/Users/samje/Documents/WebProjects2/djangoenv/catfriends4/static/images/profile4.jpg")
+		self.selenium.find_element_by_name("profile_submit").click()
+
+
+		image = self.selenium.find_element_by_class_name('profile-center')
+		self.assertIn("media/images/profile4.jpg", image.get_attribute("src"))
 

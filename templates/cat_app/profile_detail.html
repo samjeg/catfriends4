@@ -6,7 +6,7 @@
 {% if user.is_authenticated %}
   {% block profile_nav %}
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'cat_app:profile_detail' pk=profile_detail.pk %}">Profile</a>
+      <a name="profile_nav" class="nav-link" href="{% url 'cat_app:profile_detail' pk=profile_detail.pk %}">Profile</a>
     </li>
   {% endblock %}
 {% endif %}
@@ -18,6 +18,6 @@
     <h1 name="profile_username" class="my-4">Username: {{ profile_detail.user.username }}</h1>
     <br>
     <div>
-      <p><a class='btn btn-warning' href="{% url 'cat_app:update_profile' pk=profile_detail.pk %}">Update</a></p>
+      <p><a name="update_profile_link" class='btn btn-warning' href="{% url 'cat_app:update_profile' pk=profile_detail.pk %}">Update</a></p>
     </div>
 {% endblock %}

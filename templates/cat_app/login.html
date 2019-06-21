@@ -5,11 +5,11 @@
 {% block profile_nav %}
   {% if profile_detail %}
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'cat_app:profile_detail' pk=profile_detail.pk %}">Profile</a>
+      <a name="profile_nav"  class="nav-link" href="{% url 'cat_app:profile_detail' pk=profile_detail.pk %}">Profile</a>
     </li>
   {% else %}
      <li class="nav-item">
-      <a class="nav-link" href="{% url 'cat_app:create_profile' %}"">Create Profile</a>
+      <a name="create_profile_nav" class="nav-link" href="{% url 'cat_app:create_profile' %}"">Create Profile</a>
       </li>
   {% endif %}
 {% endblock %}

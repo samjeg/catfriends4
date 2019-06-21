@@ -27,23 +27,23 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-           <li class="nav-item">
-            <a class="nav-link" href="{% url 'index' %}">HomePage</a>
+          <li class="nav-item">
+            <a name="home_nav" class="nav-link" href="{% url 'index' %}">HomePage</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'cat_app:cat_list' %}">Cat List</a>
+            <a name="catlist_nav" class="nav-link" href="{% url 'cat_app:cat_list' %}">Cat List</a>
           </li>
           {% if user.is_authenticated %}
            <li class="nav-item">
-            <a class="nav-link" href="{% url 'cat_app:logout' %}">Logout</a>
+            <a name="logout_nav" class="nav-link" href="{% url 'cat_app:logout' %}">Logout</a>
             </li>
             {% block profile_nav %}{% endblock %}
           {% else %}
           <li class="nav-item">
-            <a name="login_url" class="nav-link" href="{% url 'cat_app:login' %}">Login</a>
+            <a name="login_nav" class="nav-link" href="{% url 'cat_app:login' %}">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'cat_app:register' %}">Register</a>
+            <a name="register_nav" class="nav-link" href="{% url 'cat_app:register' %}">Register</a>
           </li>
           {% endif %}
         </ul>

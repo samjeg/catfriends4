@@ -6,7 +6,7 @@
 {% if user.is_authenticated %}
 {% block profile_nav %}
   <li class="nav-item">
-    <a class="nav-link" href="{% url 'cat_app:profile_detail' pk=profile_detail.pk %}">Profile</a>
+    <a name="profile_nav" class="nav-link" href="{% url 'cat_app:profile_detail' pk=profile_detail.pk %}">Profile</a>
   </li>
 {% endblock %}
 {% endif %}
@@ -17,7 +17,7 @@
       {% csrf_token %}
       <div class="register-container">
         {{ cat_form.as_p }}
-        <button type="submit" class="btn btn-primary btn-btn">Add Cat</button>
+        <button name="cat_submit" type="submit" class="btn btn-primary btn-btn">Submit</button>
       </div>
     </form>
     <br>
