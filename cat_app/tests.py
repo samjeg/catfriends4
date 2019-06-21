@@ -41,11 +41,25 @@ class CatFriendsSeleniumTests(LiveServerTestCase):
 		super(CatFriendsSeleniumTests, cls).tearDownClass()
 
 	def test_login(self):
-		# self.selenium.implicitly_wait(5000)
 		self.selenium.get("http://127.0.0.1:8000/cat_app/login/")
-		# self.selenium.find_element_by_name("login_url").click()
 		username_input = self.selenium.find_element_by_name("username")
 		username_input.send_keys('Jilly')
 		password_input = self.selenium.find_element_by_name("password")
 		password_input.send_keys('testpassword')
 		self.selenium.find_element_by_name("login_button").click()
+		# index_text = self.selenium.find_element_by_name("index_text")
+		body = self.selenium.find_element_by_tag_name('body')
+		self.assertIn("Welcome", body.text)
+
+
+	def test_login_fakeuser(self):
+		self.selenium.get("http://127.0.0.1:8000/cat_app/login/")
+		username_input = self.selenium.find_element_by_name("username")
+		username_input.send_keys('Harry')
+		password_input = self.selenium.find_element_by_name("password")
+		password_input.send_keys('not a password')
+		self.selenium.find_element_by_name("login_button").click()
+		# index_text = self.selenium.find_element_by_name("index_text")
+		body = self.selenium.find_element_by_tag_name('body')
+		self.assertNotIn("Welcome", body.text)
+

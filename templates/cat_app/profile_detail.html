@@ -15,7 +15,7 @@
     <br>
     <img class="profile-center" src="../../../media/{{ profile_detail.picture }}"/>
     <br>
-    <h1 class="my-4">Username: {{ profile_detail.user.username }}</h1>
+    <h1 name="profile_username" class="my-4">Username: {{ profile_detail.user.username }}</h1>
     <br>
     <div>
       <p><a class='btn btn-warning' href="{% url 'cat_app:update_profile' pk=profile_detail.pk %}">Update</a></p>
