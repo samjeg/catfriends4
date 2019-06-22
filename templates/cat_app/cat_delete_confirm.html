@@ -16,7 +16,7 @@
     <form method="POST">
       {% csrf_token %}
       <div class="register-container">
-          <input type="Submit" class='btn btn-danger' value='Delete'>
+          <input name="cat_delete_btn" type="Submit" class='btn btn-danger' value='Delete'>
           <a class='btn btn-primary' href="{% url 'cat_app:cat_detail' pk=cat_detail.pk %}">Cancel</a>
       </div>
     </form>

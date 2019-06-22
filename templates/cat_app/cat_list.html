@@ -49,19 +49,19 @@
               </td>
               <td>
                 <div>
-                <a class="btn btn-primary cat-list-item-button" href="{% url 'cat_app:cat_detail' pk=cat.pk %}">Select</a>
+                <a name="cat_item_select" class="btn btn-primary cat-list-item-button" href="{% url 'cat_app:cat_detail' pk=cat.pk %}">Select</a>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
                 <div>
-                <a class="btn btn-warning cat-list-item-button" href="{% url 'cat_app:update_cat' pk=cat.pk %}">Update</a>
+                <a name="cat_item_update"class="btn btn-warning cat-list-item-button" href="{% url 'cat_app:update_cat' pk=cat.pk %}">Update</a>
               </div>
               </td>
               <td>
                 <div>
-                  <a class="btn btn-danger cat-list-item-button"  href="{% url 'cat_app:delete_cat' pk=cat.pk %}">Remove</a>
+                  <a name="cat_item_remove"class="btn btn-danger cat-list-item-button"  href="{% url 'cat_app:delete_cat' pk=cat.pk %}">Remove</a>
                 </div>
               </td>
             </tr>
