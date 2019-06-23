@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_jenkins',
     'selenium',
     'cat_app'
 ]
@@ -144,10 +143,3 @@ FIXTURE_DIRS = [
 #LOGIN STUFF
 
 LOGIN_REDIRECT_URL=reverse_lazy('index')
-
-# Django Jenkins
-
-JENKINS_TASKS = (
-    'django_jenkins.tasks.run_pep8',
-    'django_jenkins.tasks.run_pyflakes',
-)

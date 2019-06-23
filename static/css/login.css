@@ -20,7 +20,8 @@
 /* Bordered form */
 form {
   border: 3px solid #f1f1f1;
-  height: 60vh;
+  /*height: 60vh;*/
+  padding-bottom: 7vh;
   width: 30vw;
   margin-left: 27.5vw;
 }
@@ -90,7 +91,7 @@ span.psw {
 
   form {
       border: 3px solid #f1f1f1;
-      height: 50vh;
+      padding-bottom: 4vh;
       width: 70vw;
       margin-left: 7.5vw;
   }
