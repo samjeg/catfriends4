@@ -8,5 +8,8 @@
 <ul>
 	<li>General features including profiles, web security and a login/logout system</li>
 	<li>Allows users to share pictures of their pet cat with the rest of the community</li>
-	<li>User can message other user's in the main chat, or they can go and message other user's under a specific cat upload</li>	
+	<li>Each cat upload will have its own page with an image, name of the cat and a short story describing the cat,</li>
+	<li>User's can view other uploads via the cat list</li>
+	<li>If a user has uploaded the cat page they can choose to update or remove it</li>
+	<li>User's can communicate with the rest of the community by going to a cat page</li>
 </ul>
